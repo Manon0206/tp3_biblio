@@ -6,22 +6,12 @@ $num=$_GET['num'];
     $req->bindParam(':num', $num);
     $nb=$req->execute();
 
-echo '<div class="container mt-5">';
-echo '<div class="row">
-       <div class="col mt-5">';
-
 if($nb == 1) {
-    echo '<div class="alert alert-success" role="alert">
-        L\'auteur a bien été supprimée  </div>';
+     $_SESSION['message']=["success"=>"L'auteur a bien été supprimée"];
 }else{
-    echo '<div class="alert alert-danger" role="alert">
-        L\'auteur n\'a pas été supprimée  </div>';
+     $_SESSION['message']=["danger"=>"L'auteur n'a pas été supprimée"];
 }
+header('location: listeAuteurs.php');
+exit();
 ?>
-<a href="listeAuteurs.php" class="btn btn-dark"> Revenir à la liste des auteurs </a>
-</div>  
-
-
-<?php include "footer.php";
-
-?>
+ 

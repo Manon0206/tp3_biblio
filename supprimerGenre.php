@@ -6,23 +6,12 @@ $num=$_GET['num'];
     $req->bindParam(':num', $num);
     $nb=$req->execute();
 
-
-echo '<div class="container mt-5">';
-echo '<div class="row">
-       <div class="col mt-5">';
-
 if($nb == 1) {
-    echo '<div class="alert alert-success" role="alert">
-        Le genre a bien été supprimée  </div>';
+     $_SESSION['message']=["success"=>"Le genre a bien été supprimée"];
 }else{
-    echo '<div class="alert alert-danger" role="alert">
-        Le genre n\'a pas été supprimée  </div>';
+    $_SESSION['message']=["danger"=>"Le genre n'a pas été supprimée"];
 }
+header('location: listeGenres.php');
+exit();
 ?>
-<a href="listeGenres.php" class="btn btn-dark"> Revenir à la liste des genres </a>
-</div>  
-
-
-<?php include "footer.php";
-
-?>
+  
