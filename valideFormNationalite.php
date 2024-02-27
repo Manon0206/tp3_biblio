@@ -15,9 +15,9 @@ if($action == "Modifier"){
     $req=$monPdo->prepare("insert into nationalite(libelle, numContinent) values(:libelle, continent)");
     $req->bindParam(':libelle', $libelle);
     $req->bindParam(':continent', $continent);
-    $nb=$req->execute();
-}
 
+}
+$nb=$req->execute();
 $message= $action == "Modifier" ? "modifiée" : "ajoutée";
 
 echo '<div class="container mt-5">';
