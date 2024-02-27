@@ -2,14 +2,14 @@
 include "connexionpdo.php";
 //liste des nationalitées
 $libelle="";
-$continent="Tous";
+$continentSel="Tous";
 
 $texteReq="select n.num, n.libelle as 'libNation', c.libelle as 'libContinent' from nationalite n, continent c where n.numContinent=c.num";
 if(!empty($_GET)){
   $libelle=$_GET['libelle'];
-  $continent=$_GET['continent']
+  $continentSel=$_GET['continent']
   if($libelle != "") { $texteReq.= " and n.libelle like '%" .$libelle."%'";}
-  if($continent != "Tous") { $texteReq.= " and c.num =" .$continent;}
+  if($continentSel != "Tous") { $texteReq.= " and c.num =" .$continentSel;}
 }
 $texteReq.= " order by n.libelle ";
 
@@ -58,7 +58,7 @@ if(!empty($_SESSION['message'])){
      <?php
      echo "<option value='Tous'>Tout les continents</option>";
      foreach($lesContinents as $continent){
-       $selection=$continent->num == $continent ? 'selected' : '';
+       $selection=$continent->num == $continentSel ? 'selected' : '';
          echo "<option value='$continent->num' $selection>$continent->libelle</option>";
      }
        ?>
