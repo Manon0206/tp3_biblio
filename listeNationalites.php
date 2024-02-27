@@ -7,7 +7,7 @@ $continentSel="Tous";
 $texteReq="select n.num, n.libelle as 'libNation', c.libelle as 'libContinent' from nationalite n, continent c where n.numContinent=c.num";
 if(!empty($_GET)){
   $libelle=$_GET['libelle'];
-  $continentSel=$_GET['continent']
+  $continentSel=$_GET['continent'];
   if($libelle != "") { $texteReq.= " and n.libelle like '%" .$libelle."%'";}
   if($continentSel != "Tous") { $texteReq.= " and c.num =" .$continentSel;}
 }
