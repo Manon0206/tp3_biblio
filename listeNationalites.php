@@ -1,9 +1,16 @@
 <?php include "header.php";
 include "connexionpdo.php";
+//liste des nationalitées
 $req=$monPdo->prepare("select n.num, n.libelle as 'libNation', c.libelle as 'libContinent' from nationalite n, continent c where n.numContinent=c.num order by n.libelle ");
 $req->setFetchMode(PDO::FETCH_OBJ);
 $req->execute();
 $lesNationalites=$req->fetchAll();
+
+//liste des continents
+$reqContinent=$monPdo->prepare("select * from continent");
+$reqContinent->setFetchMode(PDO::FETCH_OBJ);
+$reqContinent->execute();
+$lesContinents=$reqContinent->fetchAll();
 
 if(!empty($_SESSION['message'])){
   $mesMessages=$_SESSION['message'];
@@ -20,14 +27,34 @@ if(!empty($_SESSION['message'])){
 }
 ?>
 
-
-
 <div class="container mt-5">
 
     <div class="row pt-3">
        <div class="col-9"><h2>Liste des nationalitées</h2></div>
        <div class="col-3"><a href="formNationalites.php?action=Ajouter" class='btn btn-success'><i class="fas fa-plus-circle"></i> Créer une nationalitée</a></div>
-    </div>  
+    </div> 
+    
+<form action="" method="get" class="border border-dark rounded p-3 mt-3 mb-3">
+<div class="row">
+    <div class="col">
+        <input type="text" class='form-control' id='libelle' placehoder='Saisir le libellé' name='libelle' value="<?php if($action == "Modifier") {echo $laNationalite->libelle ;}?>">
+</div>
+<div class="col">
+  <select name="continent" class="form-control">
+     <?php
+     foreach($lesContinents as $continent){
+       $selection=$continent->num == $laNationalite->numContinent ? 'selected' : '';
+         echo "<option value='$continent->num' $selection>$continent->libelle</option>";
+     }
+       ?>
+  </select>
+</div>
+<div class="col">
+    <button type="submit" class="btn btn-success btn-block"> Rechercher </button>
+    </div>
+</div>
+</form>
+
 
 <table class="table table-hover table-striped">
 <thead>
