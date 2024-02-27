@@ -12,7 +12,7 @@ if($action == "Modifier"){
     $req->bindParam(':libelle', $libelle);
     $req->bindParam(':continent', $continent);
 }else{
-    $req=$monPdo->prepare("insert into nationalite(libelle, numContinent) values(:libelle, continent)");
+    $req=$monPdo->prepare("insert into nationalite(libelle, numContinent) values(:libelle, :continent)");
     $req->bindParam(':libelle', $libelle);
     $req->bindParam(':continent', $continent);
 
