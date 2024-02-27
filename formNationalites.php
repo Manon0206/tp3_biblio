@@ -28,10 +28,11 @@ $lesContinents=$reqContinent->fetchAll();
   </div>
   <div class="form-group">
     <label for='continent'> Libellé </label>
-    <select name="continent">
+    <select name="continent" class="form-control">
     <?php
     foreach($lesContinents as $continent){
-        echo "<option value='$continent->num'>$continent->libelle</option>";
+      $selection=$continent->num == $laNationalite->numContinent ? 'selected' : '';
+        echo "<option value='$continent->num' $selection>$continent->libelle</option>";
     }
       ?>
       </select>
